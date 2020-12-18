@@ -1,0 +1,57 @@
+<section class="oe_container">
+    <div class="row">
+	    <div class="col-md-12">
+			<h2 class="oe_slogan" style="color:#875A7B;">Odoo Shopify</h2>
+			<h3 class="oe_slogan">Odoo integration with Shopify</h3>        
+		</div>
+	</div>
+	<div class="row mt32">
+	    <div class="col-md-12">
+            <p>Our module is a connector between Shopify and Odoo 13. You are able to map products between Odoo and shopify. Product mutations in Odoo and/or Shopify wil not be synchronized to a mapped product, this to avoid not to break things done by the webdesigners.</p>
+            <p>The module is working with the shopify webhooks (JSON format), see the main controller for the endpoints.</p>
+            <p>On Odoo product level it is possible to use the Odoo inventory and push the inventory for the specified product to Shopify.</p>
+			<p>Per country you define the fiscal position for using the correct vat.<p>
+			<p><b>We give no free support on this module, if you need assistance/support you can contact us.</b></p>
+        </div>
+    </div>
+	<div class="row mt32">
+	    <div class="col-md-12">
+		    <p>Configuration in Shopify:</p>
+			<ul>
+                <li>Go to “Apps -> Manage private apps” (you find this at the bottom of the screen)</li>
+                <li>Hit the button “Create new private app” (you find it at the top right corner of the screen)</li>
+                <li>Give it a name, for example “s2u_odoo” and enter your own email address in the field “Emergency developer email”</li>
+                <li>Admin API Permissions:</li>
+				<ul>
+                    <li>Customers (read access)</li>
+                    <li>Inventory (read write)</li>
+                    <li>Orders (read write)</li>
+                    <li>Products (read write)</li>
+				</ul>
+                <li>Hit “Save” to create your private app</li>
+                <li>Go to your Odoo environment, install our Shopify module</li>
+                <li>In the main menu you have now an item “Shopify”, go to “Shopify->Configuration->Instances” and create a new record. For instance name you can enter “s2u_odoo”, the fields “API Key, Password, Secret, Shop, Signature” you need to take it out of your Shopify environment.</li>
+				<ul>
+                    <li>API Key, Password and Secret you find it in the private app you just have created. Where Shared Secret is the Secret field in Odoo.</li>
+                    <li>To get the correct value for “Shop”, you need to look to the example url in your private app. Copy the part between “@” and “.myshopify.com”. If the url is for example: https://e1234567890008999d60a4457:shppa_6e0e55555555557d499@s2u-odoo-test.myshopify.com/admin/api/2020-04/orders.json, the shop name is “s2u-odoo-test”</li>
+                    <li>To get the value for “Signature” you need to go to “Settings” in Shopify (bottom left corner) and then go to “Notifications”. On the bottom of the form you will find the signature you need after “All your webhooks will be signed with”</li>
+				</ul>
+                <li>In Shopify you need to create a new webhook in Notifications:</li>
+				<ul>
+                    <li>Hit the button “Create Webhook”</li>
+                    <li>Select “Order creation” for the field event</li>
+                    <li>Select “JSON” for the field format</li>
+                    <li>In the url enter: https://yourdomainname/shopify/webhook/order_creation    (url needs to be https!!)</li>
+                    <li>Select “2020-4 (Latest)” for the field Webhook API Version</li>
+                    <li>Hit button “Save webhook”</li>
+				</ul>
+			</ul>			
+            <p>Shopify is done now.</p>
+            <p>Setup in Odoo:</p>
+            <p>In Odoo go to “Shopify->Configuration->Settings”, select a user where the Shopify orders should be saved with. For example create the user “Shopify”.</p>
+            <p>Also define a Odoo Product which can be used for discounts (Product type = Consumable)</p>
+            <p>In “Shopify->Products->Mappings” you map the Odoo products with the Shopify products. Select the instance and Odoo product. You have 2 options: Create in Shopify or Match in Shopify. If match is not working you can look up the Shopify ID by opening the product and look to url in Shopify. In the url you find the Shopify ID. Toggle “Manual Link ID” to “on” and enter the ID you found in the Shopify url. Hit “Match in Shopify” again. If everything is ok you see some data in the Mapping tree.</p>
+            <p><b>If you need futures which are not available in our module for the moment, please let us know.</b></p>
+		</div>
+	</div>
+</section>
